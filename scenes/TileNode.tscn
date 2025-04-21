@@ -1,0 +1,15 @@
+# Save this with the following scene structure:
+# 1. Create a new Button 
+# 2. Rename it to TileNode 
+# 3. Attach a script with this code:
+
+extends Button
+
+@export var tile_data: Resource
+
+func _ready():
+    self.text = "🌿"
+    self.connect("pressed", Callable(self, "_on_tile_pressed"))
+
+func _on_tile_pressed():
+    print("Tile info:", tile_data)
