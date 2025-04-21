@@ -43,6 +43,7 @@ This is an early prototype built in **Godot 4**, focusing on the simulation laye
 
 ## 📂 Project Structure
 
+```
 PhyloBloom/
 ├── autoload/                # Global game state (year, EP, traits) 
 │   └── GameManager.gd
@@ -56,7 +57,7 @@ PhyloBloom/
 ├── .gitignore               # Clean GitHub versioning 
 ├── project.godot            # Godot project file 
 ├── README.md                # You are here
-
+```
 
 ## 🌀 Simulation Highlights
 
