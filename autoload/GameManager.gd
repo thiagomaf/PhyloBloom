@@ -1,6 +1,6 @@
 # 📌 Register this as an Autoload:
 #
-# Go to Project > Project Settings > Autoload
+# Go to Project > Project Settings > Globals > Autoload
 #
 # Add autoload/GameManager.gd as GameManager
 
@@ -11,4 +11,4 @@ var ep: int = 0
 var unlocked_traits: Array = []
 
 func add_ep(amount: int):
-    ep += amount
+	ep += amount

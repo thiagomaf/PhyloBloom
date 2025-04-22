@@ -1,15 +1,9 @@
-# Save this with the following scene structure:
-# 1. Create a new Button 
-# 2. Rename it to TileNode 
-# 3. Attach a script with this code:
+[gd_scene load_steps=2 format=3 uid="uid://c7vn1l3cpkon8"]
 
-extends Button
+[ext_resource type="Script" uid="uid://c2dukidbn346m" path="res://scripts/PhyloTileData.gd" id="1"]
 
-@export var tile_data: Resource
-
-func _ready():
-    self.text = "🌿"
-    self.connect("pressed", Callable(self, "_on_tile_pressed"))
-
-func _on_tile_pressed():
-    print("Tile info:", tile_data)
+[node name="TileNode" type="ColorRect"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.3, 0.6, 0.3, 1)
+script = ExtResource("1")

@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="PhyloBloom"
+run/main_scene="res://scenes/WorldMapUI.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://autoload/GameManager.gd"
 
 [rendering]
 

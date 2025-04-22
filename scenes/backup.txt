@@ -1,0 +1,85 @@
+# Save this with the following scene structure:
+# 1. Create a new Button 
+# 2. Rename it to TileNode 
+# 3. Attach a script with this code:
+# 
+# extends Button
+# 
+# @export var tile_data: Resource
+# 
+# func _ready():
+#     self.text = "🌿"
+#     self.connect("pressed", Callable(self, "_on_tile_pressed"))
+# 
+# func _on_tile_pressed():
+#     print("Tile info:", tile_data)
+
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/TileData.gd" id=1]
+
+[node name="TileNode" type="ColorRect"]
+script = ExtResource(1)
+color = Color(0.3, 0.6, 0.3) # Green for plants
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+
+
+
+
+
+
+# extends Control
+# 
+# @onready var map_grid = $MapGrid
+# @onready var sim_manager = preload("res://scripts/SimulationManager.gd").new()
+# @onready var tile_scene = preload("res://scenes/TileNode.tscn")
+# 
+# func _ready():
+#     generate_map()
+# 
+# func generate_map():
+#     for x in 10:
+#         for y in 10:
+#             var tile_data = TileData.new()
+#             tile_data.position = Vector2(x, y)
+#             var plant = SpeciesData.new()
+#             tile_data.species_present.append(plant)
+#             sim_manager.tile_map.append(tile_data)
+# 
+#             var tile = tile_scene.instantiate()
+#             tile.tile_data = tile_data
+#             map_grid.add_child(tile)
+# 
+# func _on_simulate_pressed():
+#     sim_manager.simulate_year()
+#     GameManager.year += 1
+#     print("Simulated year:", GameManager.year)
+# 
+# # 1. Create a new Control scene called WorldMapUI
+# # 2. Add a GridContainer as a child, name it MapGrid
+# # 3. Add a Button called "Simulate Year" below it
+# # 
+# # Attach this script to the root node:
+
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/SimulationManager.gd" id=1]
+[ext_resource type="Script" path="res://scripts/PhyloTileData.gd" id=2]
+[ext_resource type="Script" path="res://scripts/SpeciesData.gd" id=3]
+[ext_resource type="PackedScene" path="res://scenes/TileNode.tscn" id=4]
+
+[node name="WorldMapUI" type="Control"]
+script = ExtResource(1)
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="GridContainer" type="GridContainer" parent="."]
+
+columns = 10
+
+# Instance 10x10 tiles
+__for x in range(100):
+    [sub_resource type="Resource" id=x+10]
+    [node name="TileNode" parent="GridContainer" instance=ExtResource(4)]

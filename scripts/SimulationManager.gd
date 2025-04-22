@@ -1,26 +1,22 @@
-extends Node
+# scripts/SimulationManager.gd
+extends Control
+
+@onready var grid := $GridContainer
+var tile_scene = preload("res://scenes/TileNode.tscn")
 
 var tile_map: Array = []
 
-func simulate_year():
-    for season in ["spring", "summer", "autumn", "winter"]:
-        for tile in tile_map:
-            simulate_tile(tile, season)
+func _ready():
+	for y in range(10):
+		for x in range(10):
+			var tile_instance = tile_scene.instantiate()
+			var tile_data = TileData.new()
+			tile_data.position = Vector2(x, y)
 
-func simulate_tile(tile: TileData, season: String):
-    for species in tile.species_present:
-        var score = evaluate_traits(species, tile, season)
-        if score > 0.5:
-            species.population += 0.1
-        else:
-            species.population -= 0.1
-        if species.population <= 0:
-            tile.species_present.erase(species)
+			var plant = SpeciesData.new()
+			tile_data.species_present.append(plant)
 
-func evaluate_traits(species: SpeciesData, tile: TileData, season: String) -> float:
-    var score = 0.0
-    if "cuticle" in species.traits and tile.moisture < 0.5:
-        score += 0.2
-    if "photosynthesis" in species.traits:
-        score += tile.light * 0.5
-    return clamp(score, 0.0, 1.0)
+			tile_instance.custom_minimum_size = Vector2(48, 48)
+			tile_map.append(tile_data)
+
+			grid.add_child(tile_instance)
